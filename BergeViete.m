@@ -1,5 +1,5 @@
 function BergeViete(f, initialGuess, desiredPrecision, maxIterations)
-    a = getArrayA(f);
+    a = getArrayA(f)
     b = [];
     c = [];
     iter = 0;
@@ -15,6 +15,7 @@ function BergeViete(f, initialGuess, desiredPrecision, maxIterations)
         c = calcArray(b, Xi, lenA);
         disp(a);
         disp(b);
+        disp('c');
         disp(c);
         
         Xi_old = Xi;
@@ -42,8 +43,8 @@ function a = getArrayA(f)
     diff_f(x) = f;
         
     while true
-        diff_f(x) = diff(diff_f(x) , x);
-        if diff_f(0) == 0
+        diff_f(x) = diff(diff_f(x) , x)
+        if diff_f == 0
             break;
         end
         a(i) = diff_f(0) / factorial(i-1);
