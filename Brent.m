@@ -40,4 +40,5 @@ while (1)
     if abs(d) > tol, b=b+d; else b=b-sign(b-a)*tol; end
     fb = f(b);
 end
+end
 
