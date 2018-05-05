@@ -27,5 +27,3 @@ if(ea < es) break; end
 end
 result([1],:) = [];
 end   % end of quadratic
-
-
