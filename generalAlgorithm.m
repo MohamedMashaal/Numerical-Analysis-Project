@@ -10,7 +10,9 @@ while (start < endPoint)
    root = Brent(f,start , nextPoint);
    froot = f(root);
    if (abs(froot) < precision)
+      m = checkMultiplicity(f,root,precision);
       roots = [roots, root];
+      roots = [roots, m];
    end
    start = nextPoint +.01;
 end
