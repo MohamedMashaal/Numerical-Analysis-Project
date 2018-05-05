@@ -9,7 +9,7 @@ function [root, i, percision, time]  = FPI(f, itrNum, initialGuess, desiredPreci
     onlyOneIteration = 1;
     
     while (1) && (onlyOneIteration)
-        if (mode == "Step")
+        if (strcmp(mode, 'Step') ~= 0)
             onlyOneIteration = 0;
         end
             
