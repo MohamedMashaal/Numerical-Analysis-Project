@@ -1,21 +1,23 @@
-function [root, i, percision, time]  = FPI(f, initialGuess, desiredPrecision, maxIterations, mode)
+function [root, i, percision, time]  = FPI(f, itrNum, initialGuess, desiredPrecision, maxIterations, mode)
     %mode 1 for quick, 0 for step
+    
     syms g(x)
     g(x) = f + x;
     disp(g);
+    
     xold = initialGuess;
     onlyOneIteration = 1;
-    itrNum = 0;
+    
     while (1) && (onlyOneIteration)
         if (mode == "Step")
             onlyOneIteration = 0;
         end
             
         itrNum = itrNum + 1;
-        xnew = subs(g,xold);
+        xnew = double(subs(g,xold));
         error = abs((xnew - xold)/xnew) * 100;
         
-        s = sprintf ('i=%d   x=%f   e=%f',i,xold,error);
+        s = sprintf ('i=%d   x=%f   e=%f',itrNum,xold,error);
         disp(s);
         
         if (error > desiredPrecision) && (itrNum < maxIterations)
@@ -25,6 +27,8 @@ function [root, i, percision, time]  = FPI(f, initialGuess, desiredPrecision, ma
            break;        
         end
         i = itrNum;
+        root = xnew;
+        time = 0;
         percision = error;
     end
 end
