@@ -41,4 +41,3 @@ function [b] = Brent(f,xl,xu)
         fb = f(b);
     end
 end
-
