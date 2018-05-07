@@ -1,4 +1,4 @@
-function [root, i, percision, time]  = FPI(f, itrNum, initialGuess, desiredPrecision, maxIterations, mode)
+function [root, i, percision, time]  = FPI(f, itrNum, initialGuess, desiredPrecision, maxIterations, mode, table)
     %mode 1 for quick, 0 for step
     
     syms g(x)
@@ -19,6 +19,10 @@ function [root, i, percision, time]  = FPI(f, itrNum, initialGuess, desiredPreci
         
         s = sprintf ('i=%d   x=%f   e=%f',itrNum,xold,error);
         disp(s);
+        
+        oldData = get(table,'Data');
+        newData = [oldData; {itrNum, xold, xnew, error}];
+        set(table,'Data',newData)
         
         if (error > desiredPrecision) && (itrNum < maxIterations)
             xold = xnew;
