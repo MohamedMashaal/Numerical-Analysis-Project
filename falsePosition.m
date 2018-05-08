@@ -1,7 +1,7 @@
-function [result] = falsePosition(Xu,Xl,es,Im);
+function [result] = falsePosition(f,Xu,Xl,es,Im);
 %this function get roots of equation by bisection method 
-str = '@(x)x^4+3*x-4'; % it will be input from the gui 
-f = str2func(str);
+%str = '@(x)x^4+3*x-4'; % it will be input from the gui 
+%f = str2func(str);
 format long
 result= [0 0 0 0 0 0];
 if((f(Xl))*(f(Xu))>0) 

@@ -1,7 +1,7 @@
-function [result] = Bisection(Xu,Xl,es,Im);
+function [result] = Bisection(f,Xu,Xl,es,Im);
 %this function get roots of equation by bisection method 
-str = '@(x)x.^3 - (0.165 .* x.^2)  + 3.993 .* 10.^(-4)'; % it will be input from the gui 
-f = str2func(str);
+%str = '@(x)x.^3 - (0.165 .* x.^2)  + 3.993 .* 10.^(-4)'; % it will be input from the gui 
+%f = str2func(str);
 format long
 if((f(Xl))*(f(Xu))>0) 
    disp('no bracket');
