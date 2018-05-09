@@ -31,8 +31,7 @@ function [root, i, percision] = BergeViete(f, currentI, initialGuess, desiredPre
         iter = iter + 1;
         
         i = iter;
-        root = Xi;
-        percision = perc;
+        root = Xi
         oldData = get(table,'Data');
         newData = [oldData; {iter, Xi_old, Xi, Xi, prec}];
         set(table,'Data',newData)

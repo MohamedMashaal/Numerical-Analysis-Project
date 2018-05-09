@@ -16,7 +16,7 @@ function [root, i, diffunc] = NewtonRaphson(func,currentI, initialPoint,maxItera
        
        %adding new row to table
        oldData = get(table,'Data');
-       newData = [oldData; {counter, 0, 0, 0, 0}];
+       newData = [oldData; {counter, double(x0), double(x1), double(x1),double(abs(x1 - x0)) , 0}];
        set(table,'Data',newData)
        
        if( precision > abs(x1 -x0))
