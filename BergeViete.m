@@ -10,6 +10,7 @@ function [root, i, percision] = BergeViete(f, currentI, initialGuess, desiredPre
     
     onlyOneIteration = 1;
     while iter < maxIterations && prec > desiredPrecision && onlyOneIteration
+        startTime = cputime;
         
         if (strcmp(mode, 'Step') ~= 0)
             onlyOneIteration = 0;
@@ -34,7 +35,7 @@ function [root, i, percision] = BergeViete(f, currentI, initialGuess, desiredPre
         root = Xi;
         percision = perc;
         oldData = get(table,'Data');
-        newData = [oldData; {iter, Xi_old, Xi, Xi, prec}];
+        newData = [oldData; {iter, Xi_old, Xi, Xi, prec, cputime - startTime}];
         set(table,'Data',newData)
         
     end

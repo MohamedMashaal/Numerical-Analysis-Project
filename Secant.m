@@ -10,13 +10,15 @@ function [root, i, x_0] = Secant(func, currentI,initial_0,initial_1,maxIteration
     end
     
     for counter =  currentI : maxIteration 
+       startTime = cputime;
+        
        x2 =  x1 - (func(x1) * (x0 - x1))/( func(x0) - func(x1));
        i = counter + 1;
        
        x_0 = x1;
        %adding new row to table
        oldData = get(table,'Data');
-       newData = [oldData; {counter, double(x0), double(x1), double(x2),double(abs(x2 - x1)) , 0}];
+       newData = [oldData; {counter, double(x0), double(x1), double(x2),double(abs(x2 - x1)) , cputime - startTime}];
        set(table,'Data',newData)
        
        if( precision > abs(x2 -x1))

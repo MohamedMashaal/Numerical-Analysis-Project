@@ -13,6 +13,8 @@ function [itr, x_l, x_u] = falsePosition(f,currentI,Xu,Xl,es,Im, mode, table)
     end
     
     for i = currentI : Im
+        startTime = cputime;
+        
         Xr= (Xl*f(Xu) - Xu*f(Xl)) / (f(Xu)-f(Xl)); % compute the midpoint xr
         ea = abs((Xr-xrold)/Xr); % approx. relative error
         test= f(Xl) * f(Xr); % compute f(xl)*f(xr)
@@ -21,7 +23,7 @@ function [itr, x_l, x_u] = falsePosition(f,currentI,Xu,Xl,es,Im, mode, table)
         itr = i + 1;
         %adding new row to table
         oldData = get(table,'Data');
-        newData = [oldData; {i, Xl, Xu, Xr, ea}];
+        newData = [oldData; {i, Xl, Xu, Xr, ea, cputime - startTime}];
         set(table,'Data',newData)
         
         if(test < 0) 
