@@ -1,6 +1,4 @@
-function xs = GaussJordan(mat)
-    n = size(mat);
-    n = n(1);
+function xs = GaussJordan(n,mat)
     xs = [];
     for i = 1 : n                 % pivot row
         for k = 1 : n            % rows (except for the pivot row)
