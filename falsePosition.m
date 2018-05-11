@@ -1,14 +1,11 @@
-function [itr, x_l, x_u] = falsePosition(f,currentI,Xu,Xl,es,Im, mode, table)
+function [itr, x_l, x_u,xrold] = falsePosition(f,currentI,Xu,Xl,es,Im, mode, table,Xr)
 
     format long
     if((f(Xl))*(f(Xu))>0) 
-       table.Data = {'', '', '', 'No Root', '', ''};
-       x_l = Xl;
-       x_u = Xu;
-       itr = 0;
-       return
+        disp('no bracket');
+        return
     end
-    xrold = 0;
+    xrold = Xr;
     
     %for strp mode
     if (strcmp(mode, 'Step') ~= 0)

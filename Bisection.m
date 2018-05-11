@@ -1,16 +1,13 @@
-function [itr, x_l, x_u] = Bisection(f, currentI, Xu,Xl,es,Im, mode, table)
+function [itr, x_l, x_u,xrold] = Bisection(f, currentI, Xu,Xl,es,Im, mode,table,xr)
 
     format long
     if((f(Xl))*(f(Xu))>0) 
-       table.Data = {'', '', '', 'No Root', '', ''};
-       x_l = Xl;
-       x_u = Xu;
-       itr = 0;
+       disp('no bracket');
        return
     end
 
-    xrold = 0;
-
+    xrold = xr;
+    itr = 0; 
     %for strp mode
     if (strcmp(mode, 'Step') ~= 0)
         Im = currentI;
@@ -19,21 +16,21 @@ function [itr, x_l, x_u] = Bisection(f, currentI, Xu,Xl,es,Im, mode, table)
     for i = currentI : Im
         startTime = cputime;
         
-        Xr=(Xu+Xl)/2; % compute the midpoint xr
-        ea = abs((Xr-xrold)/Xr); % approx. relative error
-        test= f(Xl) * f(Xr); % compute f(xl)*f(xr)
-        xrold = Xr ;
+        xr=(Xu+Xl)/2; % compute the midpoint xr
+        ea = abs((xr-xrold)/xr); % approx. relative error
+        test= f(Xl) * f(xr); % compute f(xl)*f(xr)
+        xrold = xr ;
 
         itr = i + 1;
         %adding new row to table
         oldData = get(table,'Data');
-        newData = [oldData; {i, Xl, Xu, Xr, ea, cputime - startTime}];
+        newData = [oldData; {i, Xl, Xu, xr, ea, cputime - startTime}];
         set(table,'Data',newData)
 
         if(test < 0) 
-            Xu=Xr;        
+            Xu=xr;        
         else
-            Xl=Xr;
+            Xl=xr;
         end
         
         x_l = Xl;
