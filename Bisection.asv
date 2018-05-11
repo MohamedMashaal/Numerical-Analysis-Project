@@ -1,15 +1,14 @@
-function [itr, x_l, x_u] = falsePosition(f,currentI,Xu,Xl,es,Im, mode, table)
+function [itr, x_l, x_u] = Bisection(f, currentI, Xu,Xl,es,Im, mode, table)
 
     format long
     if((f(Xl))*(f(Xu))>0) 
-       table.Data = {'', '', '', 'No Root', '', ''};
-       x_l = Xl;
-       x_u = Xu;
-       itr = 0;
+       disp('no bracket');
+       table.Data = 
        return
     end
+
     xrold = 0;
-    
+
     %for strp mode
     if (strcmp(mode, 'Step') ~= 0)
         Im = currentI;
@@ -18,34 +17,34 @@ function [itr, x_l, x_u] = falsePosition(f,currentI,Xu,Xl,es,Im, mode, table)
     for i = currentI : Im
         startTime = cputime;
         
-        Xr= (Xl*f(Xu) - Xu*f(Xl)) / (f(Xu)-f(Xl)); % compute the midpoint xr
+        Xr=(Xu+Xl)/2; % compute the midpoint xr
         ea = abs((Xr-xrold)/Xr); % approx. relative error
         test= f(Xl) * f(Xr); % compute f(xl)*f(xr)
         xrold = Xr ;
-        
+
         itr = i + 1;
         %adding new row to table
         oldData = get(table,'Data');
         newData = [oldData; {i, Xl, Xu, Xr, ea, cputime - startTime}];
         set(table,'Data',newData)
-        
+
         if(test < 0) 
-            Xu=Xr;
+            Xu=Xr;        
         else
             Xl=Xr;
         end
-
+        
         x_l = Xl;
         x_u = Xu;
-        
-        if(test == 0) 
-            ea=0; 
+
+        if(test == 0)
+            ea=0;
         end
-        
+
         if(ea < es) 
             break; 
         end
+
     end
+
 end   % end of quadratic
-
-

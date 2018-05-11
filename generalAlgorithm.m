@@ -14,6 +14,10 @@ function [roots] = generalAlgorithm(f,xl,xu,precision, interval)
           roots = [roots, root];
           roots = [roots, m];
        end
-       start = nextPoint +.01;
+       if(precision > 10^-3)
+          start = nextPoint + 10^-3;
+       else
+          start = nextPoint + precision;
+       end
     end
 end
