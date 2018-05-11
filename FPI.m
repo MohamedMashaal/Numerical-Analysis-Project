@@ -12,13 +12,15 @@ function [root, i, percision]  = FPI(f, itrNum, initialGuess, desiredPrecision, 
         if (strcmp(mode, 'Step') ~= 0)
             onlyOneIteration = 0;
         end
-            
+        
+        startTime = cputime;
+        
         itrNum = itrNum + 1;
         xnew = double(subs(g,xold));
         error = abs((xnew - xold)/xnew) * 100;
         
         oldData = get(table,'Data');
-        newData = [oldData; {itrNum, xold, xnew, xnew, error}];
+        newData = [oldData; {itrNum, xold, xnew, xnew, error, cputime - startTime}];
         set(table,'Data',newData)
         
         if (error > desiredPrecision) && (itrNum < maxIterations)
