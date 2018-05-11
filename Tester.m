@@ -4,8 +4,8 @@ import FPI;
 import GaussJordan;
 import NewtonInterpolation;
 
-    f = @(x) x ^3 -  3 * x^2  +4;
-    BergeViete(f ,0, 1, 0.001 , 50, 'step', 0);
+%    f = @(x) x ^3 -  3 * x^2  +4;
+%    BergeViete(f ,0, 1, 0.001 , 50, 'step', 0);
     
     % f = @(x) x^2 - 3*x + 2;
     
@@ -23,6 +23,6 @@ import NewtonInterpolation;
      points = [2 3];
      x = [0 2 3 4 5];
      y = [2 14 74 242 602];
-     %NewtonInterpolation(order, points, x, y);
+     NewtonInterpolation(order, points, x, y);
 
 end
