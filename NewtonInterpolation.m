@@ -31,7 +31,11 @@ function [poly, result] = NewtonInterpolation(order, points, xs, ys)
         f = f + w;
     end
     
-    poly = f;
+    for i = 1 : length(points)
+       result(i) = f(points(i)); 
+    end
     
+    poly = f
+    result
 
 end
