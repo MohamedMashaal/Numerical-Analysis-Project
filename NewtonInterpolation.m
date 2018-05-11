@@ -1,15 +1,15 @@
-function [poly, result] = NewtonInterpolation(order, points, x, y)
-    if(length(x) ~= length(y))
+function [poly, result] = NewtonInterpolation(order, points, xs, ys)
+    if(length(xs) ~= length(ys))
        fprintf(1,'\nERROR!\n X and F(x) must have the same number of elements\n');
        poly = 0;
        result = NaN; 
     end
-    n = length(x);
+    n = length(xs);
     b = zeros(n, n+1);
     
     for i = 1 : n
-        b(i, 1) = x(i);
-        b(i, 2) = y(i);
+        b(i, 1) = xs(i);
+        b(i, 2) = ys(i);
     end
     
     for j = 3 : n+1
@@ -18,6 +18,20 @@ function [poly, result] = NewtonInterpolation(order, points, x, y)
         end
     end
     
-    disp(b);
+    % getting the polynomial function
+    syms f(x);
+    f(x) = b(1,2);
+    
+    for i = 2 : n
+        syms w(x);
+        w = b(i, i+1);
+        for j = 1 : i-1
+            w = w * (x - xs(j));
+        end
+        f = f + w;
+    end
+    
+    poly = f;
+    
 
 end
