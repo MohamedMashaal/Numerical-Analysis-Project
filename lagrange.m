@@ -1,4 +1,4 @@
-function Result=lagrange(type,points,X,Y)
+function [poly,Result]=lagrange(type,points,X,Y)
 %
 %LAGRANGE   approx a point-defined function using the Lagrange polynomial interpolation
 % type mean  linear(1)-quadratic(2) and so on 
@@ -12,19 +12,26 @@ if (size(X,2)~=size(Y,2))
    fprintf(1,'\nERROR!\n X and F(x) must have the same number of elements\n');
    Result=NaN;
 else
-    for q=1:1:n
-   for i=1:(type+1)
+     syms f(x);
+     syms w(x);
+     w(x)=0;
+     f(x)=1;
+      for i=1:(type+1)
       for j=1:(type+1)
          if (i~=j)
-            L(i,q)=L(i,q).*(points(q)-X(j))/(X(i)-X(j));
+            f(x)=f(x).*(x-X(j))/(X(i)-X(j));
          end
       end
-   end
-    end
+      w = w+ (f(x)*Y(i));
+      f(x) = 1;
+      end
+    
+   disp(w);
+   poly = w ;
     Result=zeros(1,n);
    for q=1:1:n
    for i=1:(type+1)
-      Result(1,q)=Result(1,q)+Y(i)*L(i,q);
+      Result(1,q)=w(points(q));
    end
    end
 end 
