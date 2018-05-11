@@ -1,4 +1,4 @@
-function [root, i, percision] = BergeViete(f, currentI, initialGuess, desiredPrecision, maxIterations, mode, table)
+function [root, i, percision] = BergeViete(f, currentI, initialGuess, desiredPrecision, maxIterations)
     a = getArrayA(f);
     b = [];
     c = [];
@@ -9,7 +9,7 @@ function [root, i, percision] = BergeViete(f, currentI, initialGuess, desiredPre
     lenA = length(a);
     
     onlyOneIteration = 1;
-    while iter < maxIterations && prec > desiredPrecision && onlyOneIteration
+    while iter < maxIterations && prec > desiredPrecision && onlyOneIteration = 1
         
         if (strcmp(mode, 'Step') ~= 0)
             onlyOneIteration = 0;
@@ -33,7 +33,7 @@ function [root, i, percision] = BergeViete(f, currentI, initialGuess, desiredPre
         
         i = iter;
         root = Xi;
-        percision = prec;
+        percision = perc;
         oldData = get(table,'Data');
         newData = [oldData; {iter, Xi_old, Xi, Xi, prec}];
         set(table,'Data',newData)
