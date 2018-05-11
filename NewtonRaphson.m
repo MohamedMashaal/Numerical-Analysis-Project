@@ -12,7 +12,13 @@ function [root, i, diffunc] = NewtonRaphson(func,currentI, initialPoint,maxItera
     
     for counter =  currentI : maxIteration 
        startTime = cputime;
-        
+       denom = vpa(subs(diffunc,x0));
+       if(denom == 0)
+           table.Data = {'', '', '', 'Division By Zero', '', ''};
+           i = 0;
+           root = x0;
+           return
+       end
        x1 =  x0 - (func(x0)/ vpa(subs(diffunc,x0)));
        i = counter + 1;
        
