@@ -2,7 +2,10 @@ function [itr, x_l, x_u] = Bisection(f, currentI, Xu,Xl,es,Im, mode, table)
 
     format long
     if((f(Xl))*(f(Xu))>0) 
-       disp('no bracket');
+       table.Data = {'', '', '', 'No Root', '', ''};
+       x_l = Xl;
+       x_u = Xu;
+       itr = 0;
        return
     end
 
