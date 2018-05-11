@@ -1,4 +1,4 @@
-function [poly,Result]=lagrange(type,points,X,Y)
+function [poly,Result, time]=lagrange(type,points,X,Y)
 %
 %LAGRANGE   approx a point-defined function using the Lagrange polynomial interpolation
 % type mean  linear(1)-quadratic(2) and so on 
@@ -6,6 +6,7 @@ function [poly,Result]=lagrange(type,points,X,Y)
 % X  is the set of x  
 % Y  the set of  y (F(x))
 % result is array of the result 
+time = cputime;
 L=ones(type+1,size(points,2));
 n=size(points,2);
 if (size(X,2)~=size(Y,2))
@@ -16,6 +17,7 @@ else
      syms w(x);
      w(x)=0;
      f(x)=1;
+     type = str2num(type);
       for i=1:(type+1)
       for j=1:(type+1)
          if (i~=j)
@@ -35,4 +37,5 @@ else
    end
    end
 end 
+    time = cputime - time;
 end

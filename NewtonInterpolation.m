@@ -1,9 +1,11 @@
-function [poly, result] = NewtonInterpolation(order, points, xs, ys)
+function [poly, result, time] = NewtonInterpolation(order, points, xs, ys)
+    time = cputime;
     if(length(xs) ~= length(ys))
        fprintf(1,'\nERROR!\n X and F(x) must have the same number of elements\n');
        poly = 0;
        result = NaN; 
     end
+    result = [];
     n = length(xs);
     b = zeros(n, n+1);
     
@@ -35,7 +37,7 @@ function [poly, result] = NewtonInterpolation(order, points, xs, ys)
        result(i) = f(points(i)); 
     end
     
-    poly = f
-    result
+    poly = f;
+    time = cputime - time;
 
 end
