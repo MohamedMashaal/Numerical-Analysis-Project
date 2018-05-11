@@ -11,7 +11,14 @@ function [root, i, x_0] = Secant(func, currentI,initial_0,initial_1,maxIteration
     
     for counter =  currentI : maxIteration 
        startTime = cputime;
-        
+       denom = func(x0) - func(x1);
+       if(denom == 0)
+            table.Data = {'', '', '', 'Division By Zero', '', ''};
+            i = 0;
+            x_0 = x0;
+            root = x1; 
+            return
+       end
        x2 =  x1 - (func(x1) * (x0 - x1))/( func(x0) - func(x1));
        i = counter + 1;
        
