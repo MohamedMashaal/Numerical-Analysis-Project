@@ -20,7 +20,7 @@ function [root, i, percision]  = FPI(f, itrNum, initialGuess, desiredPrecision, 
         error = abs((xnew - xold)/xnew) * 100;
         
         oldData = get(table,'Data');
-        newData = [oldData; {itrNum, xold, xnew, xnew, error, cputime - startTime}];
+        newData = [oldData; {itrNum, xold, '', xnew, error, cputime - startTime}];
         set(table,'Data',newData)
         
         if (error > desiredPrecision) && (itrNum < maxIterations)
